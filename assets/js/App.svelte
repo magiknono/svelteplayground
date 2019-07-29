@@ -39,7 +39,36 @@
 		version: 3,
 		speed: 'blazing',
 		website: 'https://svelte.dev'
-	};
+  };
+  
+  // Logic
+  let user = { loggedIn: false };
+
+	function toggle() {
+		user.loggedIn = !user.loggedIn;
+  }
+  
+  let x = 7;
+
+  let cats = [
+		{ id: 'J---aiyznGQ', name: 'Keyboard Cat' },
+		{ id: 'z_AbfPXTKms', name: 'Maru' },
+		{ id: 'OUtn3pvWmpg', name: 'Henri The Existential Cat' }
+  ];
+  
+  // import Thing from './Thing.svelte';
+
+	// let things = [
+	// 	{ id: 1, value: 'a' },
+	// 	{ id: 2, value: 'b' },
+	// 	{ id: 3, value: 'c' },
+	// 	{ id: 4, value: 'd' },
+	// 	{ id: 5, value: 'e' }
+	// ];
+
+	// function handleClick() {
+	// 	things = things.slice(1);
+	// }
 </script>
 
 <style>
@@ -80,5 +109,58 @@
     <Info name={pkg.name} version={pkg.version} speed={pkg.speed} website={pkg.website}/>
     <cite>If you have an object of properties, you can 'spread' them on to a component instead of specifying each one:</cite>
     <Info {...pkg}/>
+    <hr />
+    <p>Logic</p>
+    <cite>A # character always indicates a block opening tag. A / character always indicates a block closing tag. A : character, as in :else, indicates a block continuation tag.</cite>
+    <p>
+      {#if user.loggedIn}
+        <button on:click={toggle}>
+          Log out
+        </button>
+      {:else}
+        <button on:click={toggle}>
+          Log in
+        </button>
+      {/if}
+    </p>
+    {#if x > 10}
+      <p>{x} is greater than 10</p>
+    {:else if 5 > x}
+      <p>{x} is less than 5</p>
+    {:else}
+      <p>{x} is between 5 and 10</p>
+    {/if}
+    <h1>The Famous Cats of YouTube</h1>
+    <ul>
+      {#each cats as cat}
+        <li><a target="_blank" href="https://www.youtube.com/watch?v={cat.id}">
+          {cat.name}
+        </a></li>
+      {/each}
+    </ul>
+     <ul>
+     <!-- with index -->
+      {#each cats as cat, i}
+        <li><a target="_blank" href="https://www.youtube.com/watch?v={cat.id}">
+          {i + 1}: {cat.name}
+        </a></li>
+      {/each}
+    </ul>
+    <ul>
+      <!-- destructuring -->
+      {#each cats as { id, name }}
+        <li><a target="_blank" href="https://www.youtube.com/watch?v={id}">
+          {name}
+        </a></li>
+      {/each}
+    </ul>
+    <hr />
+    <!-- <button on:click={handleClick}>
+      Remove first thing
+    </button>
+
+    {#each things as thing (thing.id)}
+      <Thing value={thing.value}/>
+    {/each} -->
  </article>
 </section>
