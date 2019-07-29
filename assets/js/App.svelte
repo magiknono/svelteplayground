@@ -1,7 +1,7 @@
 <script>
   import Nested from './Nested.svelte';
   export let name;
-  export let src = 'images/phoenix.png';
+  export let src = 'images/svelte-logo.svg';
   let string = `this string contains some <strong>HTML!!!</strong>`;
 
   	let count = 1;
@@ -24,14 +24,20 @@
   }
 </style>
 
-<h1>Hello {name.toUpperCase()}!</h1>
-<img src={src} alt="phoenix logo" />
-<p>Hello</p>
-<Nested/>
-<p>{@html string}</p>
-<button on:click={handleClick}>
-	Count: {count}
-</button>
+<section class="row">
+  <article class="column">
 
-<p>{count} * 2 = {doubled}</p>
-<p>{doubled} * 2 = {quadrupled}</p>
+    <h1>Hello {name.toUpperCase()}!</h1>
+    <img src={src} alt="svelte logo" />
+    <p>Hello</p>
+    <Nested/>
+    <p>{@html string}</p>
+    <button on:click={handleClick}>
+      Count: {count}
+    </button>
+
+    <p>{count} * 2 = {doubled}</p>
+    <p>{doubled} * 2 = {quadrupled}</p>
+
+ </article>
+</section>
